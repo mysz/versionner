@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Versionner by mysz</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Versionner</h1>
+        <p class="header">Manipulating versions is easy</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/mysz/versionner/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/mysz/versionner/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/mysz/versionner">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/mysz">mysz</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="versionner" class="anchor" href="#versionner" aria-hidden="true"><span class="octicon octicon-link"></span></a>versionner</h1>
+
+<p><code>versionner</code> helps manipulating version of the project.</p>
+
+<h2>
+<a id="current-stable-version" class="anchor" href="#current-stable-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current stable version</h2>
+
+<p>0.2.0</p>
+
+<h2>
+<a id="but-why" class="anchor" href="#but-why" aria-hidden="true"><span class="octicon octicon-link"></span></a>But why?</h2>
+
+<p>You can change version manually. But:</p>
+
+<ul>
+<li>manual changes are prone to errors. And <code>versionner</code> guards the compliance
+with <a href="http://semver.org/">Semantic Versioning</a>.</li>
+<li>it's easier to write: <code>versionner up</code> instead of open editor, edit and
+save changes ;) </li>
+</ul>
+
+<h2>
+<a id="some-examples" class="anchor" href="#some-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Some examples</h2>
+
+<p>Some examples:</p>
+
+<pre><code># prints current version info
+% versionner
+
+# increase minor by 1, set patch to 0
+versionner up
+
+# increase patch by 1
+versionner up --patch 
+
+# increase patch by 4
+versionner up --patch 4
+
+# just guess...
+versionner set --minor 3 --patch 2 --build asd3f
+
+# set version to 1.0.0
+versionner set 1.0.0
+</code></pre>
+
+<h2>
+<a id="more" class="anchor" href="#more" aria-hidden="true"><span class="octicon octicon-link"></span></a>More</h2>
+
+<p>Everything is in help :) Just execute:</p>
+
+<pre><code>versionner --help
+</code></pre>
+
+<p>Look at result:</p>
+
+<pre><code>% versionner --help
+usage: versionner [-h] [--file FILE] [--version] {init,up,set} ...
+
+Manipulate version of project
+
+positional arguments:
+  {init,up,set}
+    init                Create new version file
+    up                  Increase version
+    set                 Set version to specified one
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --file FILE, -f FILE  path to file where version is saved
+  --version, -v         show program's version number and exit
+</code></pre>
+
+<p>So, there are three commands: <code>init</code>, <code>up</code> and <code>set</code>. We want to look at this:</p>
+
+<pre><code>% versionner init --help
+usage: versionner init [-h] [value]
+
+positional arguments:
+  value       Initial version
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+% versionner up --help
+usage: versionner up [-h] [--major | --minor | --patch] [value]
+
+positional arguments:
+  value        Increase version by this value (default: 1)
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --major, -j  increase major part of version
+  --minor, -n  increase minor part of version (default)
+  --patch, -p  increase patch part of version
+
+% versionner set --help
+usage: versionner set [-h] [--major MAJOR] [--minor MINOR] [--patch PATCH]
+                      [--prerelease PRERELEASE] [--build BUILD]
+                      [value]
+
+positional arguments:
+  value                 set version to this value
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --major MAJOR, -j MAJOR
+                        set major part of version to MAJOR
+  --minor MINOR, -n MINOR
+                        set minor part of version to MINOR
+  --patch PATCH, -p PATCH
+                        set patch part of version to PATCH
+  --prerelease PRERELEASE, -r PRERELEASE
+                        set prerelease part of version to PRERELEASE
+  --build BUILD, -b BUILD
+                        set build part of version to BUILD
+</code></pre>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p><code>versionner</code> should work on any platform where <a href="http://python.org">Python</a> is available, it means Linux, Windows, MacOS X etc. </p>
+
+<p>To install, go to <a href="https://github.com/mysz/versionner/releases">GitHub releases</a>, download newest release, unpack and put somewhere in <code>PATH</code> (ie. <code>~/bin</code> or <code>/usr/local/bin</code>).</p>
+
+<p>If You want to install newest unstable version, then just copy file to your PATH, for example:</p>
+
+<pre><code>curl https://raw.github.com/mysz/versionner/master/versionner.py &gt; /usr/local/bin/versionner
+</code></pre>
+
+<p>or:</p>
+
+<pre><code>wget https://raw.github.com/mysz/versionner/master/versionner.py -O /usr/local/bin/versionner
+</code></pre>
+
+<p>Voila!</p>
+
+<h2>
+<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors</h2>
+
+<p>Marcin Sztolcman <a href="mailto:marcin@urzenia.net">marcin@urzenia.net</a></p>
+
+<h2>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
+
+<p>If you like or dislike this software, please do not hesitate to tell me about this me via email (<a href="mailto:marcin@urzenia.net">marcin@urzenia.net</a>).</p>
+
+<p>If you find bug or have an idea to enhance this tool, please use GitHub's <a href="https://github.com/mysz/versionner/issues">issues</a>.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>The MIT License (MIT)</p>
+
+<p>Copyright (c) 2015 Marcin Sztolcman</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+
+<h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>ChangeLog</h2>
+
+<h3>
+<a id="v020" class="anchor" href="#v020" aria-hidden="true"><span class="octicon octicon-link"></span></a>v0.2.0</h3>
+
+<ul>
+<li>in progress</li>
+</ul>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
