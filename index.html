@@ -38,18 +38,22 @@
 <h2>
 <a id="current-stable-version" class="anchor" href="#current-stable-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current stable version</h2>
 
-<p>0.2.0</p>
+<p>0.3.0</p>
 
 <h2>
-<a id="but-why" class="anchor" href="#but-why" aria-hidden="true"><span class="octicon octicon-link"></span></a>But why?</h2>
-
-<p>You can change version manually. But:</p>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
 
 <ul>
-<li>manual changes are prone to errors. And <code>versionner</code> guards the compliance
-with <a href="http://semver.org/">Semantic Versioning</a>.</li>
+<li>
+<code>versionner</code> guards the compliance with <a href="http://semver.org/">Semantic Versioning</a>.</li>
+<li>
+<code>versionner</code> is error proof (manual changes are error-prone).</li>
 <li>it's easier to write: <code>versionner up</code> instead of open editor, edit and
-save changes ;) </li>
+save changes ;)</li>
+<li>
+<code>versionner</code> updates also project files (like README or sth)</li>
+<li>it's <a href="#Installation">very easy to install</a>
+</li>
 </ul>
 
 <h2>
@@ -87,7 +91,9 @@ versionner set 1.0.0
 <p>Look at result:</p>
 
 <pre><code>% versionner --help
-usage: versionner [-h] [--file FILE] [--version] {init,up,set} ...
+usage: versionner [-h] [--file VERSION_FILE] [--version]
+                  [--date-format DATE_FORMAT]
+                  {init,up,set} ...
 
 Manipulate version of project
 
@@ -99,8 +105,11 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --file FILE, -f FILE  path to file where version is saved
+  --file VERSION_FILE, -f VERSION_FILE
+                        path to file where version is saved
   --version, -v         show program's version number and exit
+  --date-format DATE_FORMAT
+                        Date format used in project files
 </code></pre>
 
 <p>So, there are three commands: <code>init</code>, <code>up</code> and <code>set</code>. We want to look at this:</p>
@@ -147,6 +156,42 @@ optional arguments:
   --build BUILD, -b BUILD
                         set build part of version to BUILD
 </code></pre>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>Configuration is both: user-wide and project-wide.</p>
+
+<p>User-wide is stored in <code>~/.versionner.rc</code> file, and project-wide is stored in
+<code>&lt;PROJECT_ROOT&gt;/.versionner.rc</code>. Projects' configuration is superior to user-wide.</p>
+
+<p>It allows you also to modify other files specified in configuration.</p>
+
+<p><code>.versionner.rc</code> is INI file in format:</p>
+
+<pre><code>[versionner]
+file = ./VERSION
+date_format = %Y-%m-%d
+up_part = patch
+
+[file:some/folder/some_file.py]
+enabled = true
+search = ^\s*__version__\s*=.*$
+replace = __version__ = '%(version)s'
+date_format = %Y-%m-%d
+match = line
+search_flags = 
+encoding = utf-8
+</code></pre>
+
+<p>Data in '[project]' section are default data for whole project.</p>
+
+<p>Data in '[file:some/folder/some_file.py]' section are for single file from
+project. You can specify here that file 'some/folder/some_file.py' have
+version string (key: <code>enabled</code>), has encoding <code>encoding</code> and we have to
+search for it (<code>search</code>) and replace it with value of <code>replace</code>. If <code>match</code> is
+'line', then <code>search</code> is matched line by line, and for 'file' whole file is
+read into memory and matched against <code>search</code>.</p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -207,7 +252,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 <a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>ChangeLog</h2>
 
 <h3>
-<a id="v020" class="anchor" href="#v020" aria-hidden="true"><span class="octicon octicon-link"></span></a>v0.2.0</h3>
+<a id="v030" class="anchor" href="#v030" aria-hidden="true"><span class="octicon octicon-link"></span></a>v0.3.0</h3>
 
 <ul>
 <li>in progress</li>
