@@ -3,6 +3,8 @@ versionner
 
 `versionner` helps manipulating version of the project.
 
+With one command you can update all required files with new version.
+
 Current stable version
 ----------------------
 
