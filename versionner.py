@@ -277,7 +277,7 @@ def parse_args(args, **defaults):
     """
     prog = pathlib.Path(sys.argv[0]).parts[-1].replace('.py', '')
     version = "%%(prog)s %s" % __version__
-    p = argparse.ArgumentParser(prog=prog, description='Manipulate version of project')
+    p = argparse.ArgumentParser(prog=prog, description='Helps manipulating version of the project')
     p.add_argument('--file', '-f', dest='version_file', type=str,
         default=defaults.get('version_file'),
         help="path to file where version is saved")
