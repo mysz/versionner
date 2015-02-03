@@ -8,7 +8,7 @@ With one command you can update all required files with new version.
 Current stable version
 ----------------------
 
-0.4.2
+0.4.3
 
 Features
 --------
@@ -217,6 +217,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ChangeLog
 ---------
+
+### v0.4.3
+
+* do not fail when VERSION file is missing
+* automatically use python3 (shebang)
+* updated program description in help
 
 ### v0.4.2
 
