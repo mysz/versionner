@@ -470,7 +470,11 @@ def main():
         version_file.write(current)
 
     else:
-        current = version_file.read()
+        try:
+            current = version_file.read()
+        except FileNotFoundError:
+            print('Version file not found', file=sys.stderr)
+            sys.exit(1)
 
     print("Current version: %s" % current)
     if quant:
