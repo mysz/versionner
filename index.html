@@ -75,25 +75,25 @@ save changes ;)</li>
 % ver
 
 # increase minor by 1, set patch to 0
-ver up
+% ver up
 
 # increase patch by 1
-ver up --patch
+% ver up --patch
 
 # create git tag
-ver tag
+% ver tag
 
 # increase patch by 4
-ver up --patch 4
+% ver up --patch 4
 
 # just guess...
-ver set --minor 3 --patch 2 --build asd3f
+% ver set --minor 3 --patch 2 --build asd3f
 
 # set version to 1.0.0
-ver set 1.0.0
+% ver set 1.0.0
 
 # create signed VCS tag
-ver tag --vcs-param -s
+% ver tag --vcs-param -s
 </code></pre>
 
 <h2>
@@ -130,7 +130,7 @@ optional arguments:
   --verbose             Be more verbose if it's possible
 </code></pre>
 
-<p>So, there are three commands: <code>init</code>, <code>up</code>, <code>set</code> and <code>tag</code>. We want to look at this:</p>
+<p>So, there are four commands: <code>init</code>, <code>up</code>, <code>set</code> and <code>tag</code>. We want to look at this:</p>
 
 <pre><code>% ver init --help
 usage: ver init [-h] [value]
