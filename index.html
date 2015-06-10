@@ -6,7 +6,7 @@
     <title>Versionner by mysz</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
     <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
@@ -40,7 +40,7 @@
 <h2>
 <a id="current-stable-version" class="anchor" href="#current-stable-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current stable version</h2>
 
-<p>1.1.1</p>
+<p>1.2.0</p>
 
 <h2>
 <a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
@@ -50,7 +50,7 @@
 <code>versionner</code> guards the compliance with <a href="http://semver.org/">Semantic Versioning</a>
 </li>
 <li>manual changes are error-prone, <code>versionner</code> is error proof</li>
-<li>it's easier to write: <code>versionner up</code> instead of open editor, edit and
+<li>it's easier to write: <code>ver up</code> instead of open editor, edit and
 save changes ;)</li>
 <li>
 <code>versionner</code> updates also project files (like README or sth)</li>
@@ -223,6 +223,14 @@ date_format = %Y-%m-%d
 match = line
 search_flags = 
 encoding = utf-8
+
+[file:2:some/folder/some_file.py]
+    enabled = true
+    search = ^"Program is in version \d+\.\d+\.\d+"$
+    replace = "Program is in version %(version)s"
+    match = line
+    search_flags = 
+    encoding = utf-8
 </code></pre>
 
 <p>Data in '[project]' section are default data for whole project.</p>
@@ -234,8 +242,17 @@ search for it (<code>search</code>) and replace it with value of <code>replace</
 'line', then <code>search</code> is matched line by line, and for 'file' whole file is
 read into memory and matched against <code>search</code>.</p>
 
+<p>If you must do more replaces in single file, just add number to section name:</p>
+
+<pre><code>[file:2:some/path]
+</code></pre>
+
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<ol>
+<li>Using PIP</li>
+</ol>
 
 <p><code>versionner</code> should work on any platform where <a href="http://python.org">Python</a>
 is available, it means Linux, Windows, MacOS X etc. </p>
@@ -243,6 +260,29 @@ is available, it means Linux, Windows, MacOS X etc. </p>
 <p>Simplest way is to use Python's built-in package system:</p>
 
 <pre><code>pip3 install versionner
+</code></pre>
+
+<ol>
+<li>Using sources</li>
+</ol>
+
+<p>Download sources from <a href="https://github.com/mysz/versionner/archive/1.2.0.zip">Github</a>:</p>
+
+<pre><code>wget -O 1.2.0.zip https://github.com/mysz/versionner/archive/1.2.0.zip
+</code></pre>
+
+<p>or
+    curl -o 1.2.0.zip <a href="https://github.com/mysz/versionner/archive/1.2.0.zip">https://github.com/mysz/versionner/archive/1.2.0.zip</a></p>
+
+<p>Unpack:</p>
+
+<pre><code>unzip 1.2.0.zip
+</code></pre>
+
+<p>And install</p>
+
+<pre><code>cd versionner-1.2.0
+python3 setup.py install
 </code></pre>
 
 <p>Voila!</p>
@@ -287,6 +327,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 
 <h2>
 <a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>ChangeLog</h2>
+
+<h3>
+<a id="v120" class="anchor" href="#v120" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.2.0</h3>
+
+<ul>
+<li>Allow to make more then one replace in single file</li>
+<li>Do not show an exception when version file does not exists</li>
+<li>PEP8 fixes (coding style)</li>
+<li>Makefile improvements</li>
+</ul>
 
 <h3>
 <a id="v111" class="anchor" href="#v111" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.1.1</h3>
