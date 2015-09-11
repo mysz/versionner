@@ -40,7 +40,7 @@
 <h2>
 <a id="current-stable-version" class="anchor" href="#current-stable-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current stable version</h2>
 
-<p>1.2.0</p>
+<p>1.3.0</p>
 
 <h2>
 <a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
@@ -85,6 +85,9 @@ save changes ;)</li>
 # increase patch by 1
 % ver up --patch
 
+# increase patch by 2 and try to automatically commit changes
+% ver up --patch -c
+
 # create git tag
 % ver tag
 
@@ -113,6 +116,7 @@ save changes ;)</li>
 
 <pre><code>% ver --help
 usage: ver [-h] [--file VERSION_FILE] [--version] [--date-format DATE_FORMAT]
+           [--vcs-engine VCS_ENGINE] [--vcs-commit-message VCS_COMMIT_MESSAGE]
            [--verbose]
            {init,up,set,tag} ...
 
@@ -132,36 +136,42 @@ optional arguments:
   --version, -v         show program's version number and exit
   --date-format DATE_FORMAT
                         Date format used in project files
+  --vcs-engine VCS_ENGINE
+                        Select VCS engine (only git is supported currently)
+  --vcs-commit-message VCS_COMMIT_MESSAGE, -m VCS_COMMIT_MESSAGE
+                        Commit message used when committing changes
   --verbose             Be more verbose if it's possible
 </code></pre>
 
 <p>So, there are four commands: <code>init</code>, <code>up</code>, <code>set</code> and <code>tag</code>. We want to look at this:</p>
 
-<pre><code>% ver init --help
-usage: ver init [-h] [value]
+<pre><code>usage: ver init [-h] [--commit] [value]
 
 positional arguments:
-  value       Initial version
+  value         Initial version
 
 optional arguments:
-  -h, --help  show this help message and exit
+  -h, --help    show this help message and exit
+  --commit, -c  Commit changes done by `up` command (only if there is no
+                changes in repo before)
 
-% ver up --help
-usage: ver up [-h] [--major | --minor | --patch] [value]
+usage: ver up [-h] [--commit] [--major | --minor | --patch] [value]
 
 positional arguments:
-  value        Increase version by this value (default: 1)
+  value         Increase version by this value (default: 1)
 
 optional arguments:
-  -h, --help   show this help message and exit
-  --major, -j  increase major part of version
-  --minor, -n  increase minor part of version (project default)
-  --patch, -p  increase patch part of version
+  -h, --help    show this help message and exit
+  --commit, -c  Commit changes done by `up` command (only if there is no
+                changes in repo before)
+  --major, -j   increase major part of version
+  --minor, -n   increase minor part of version (project default)
+  --patch, -p   increase patch part of version
 
 % ver set --help
 usage: ver set [-h] [--major MAJOR] [--minor MINOR] [--patch PATCH]
-                      [--prerelease PRERELEASE] [--build BUILD]
-                      [value]
+               [--prerelease PRERELEASE] [--build BUILD] [--commit]
+               [value]
 
 positional arguments:
   value                 set version to this value
@@ -178,17 +188,16 @@ optional arguments:
                         set prerelease part of version to PRERELEASE
   --build BUILD, -b BUILD
                         set build part of version to BUILD
+  --commit, -c          Commit changes done by `set` command (only if there is
+                        no changes in repo before)
 
 % ver tag --help
-usage: ver tag [-h] [--vcs-engine VCS_ENGINE] [--vcs-tag-param VCS_TAG_PARAMS]
+usage: ver tag [-h] [--vcs-tag-param VCS_TAG_PARAMS]
 
 optional arguments:
   -h, --help            show this help message and exit
-  --vcs-engine VCS_ENGINE
-                        Select VCS engine used for tagging (only git is
-                        supported currently)
   --vcs-tag-param VCS_TAG_PARAMS
-                        Additional params to "tag" command
+                        Additional params for VCS for "tag" command
 </code></pre>
 
 <h2>
@@ -211,6 +220,7 @@ up_part = patch
 
 [vcs]
 engine = git
+commit_message = '%s'
 ;tag_params =
 ;  -f
 ;  --local-user=some-key-id
@@ -266,24 +276,24 @@ is available, it means Linux, Windows, MacOS X etc. </p>
 <li>Using sources</li>
 </ol>
 
-<p>Download sources from <a href="https://github.com/mysz/versionner/archive/1.2.0.zip">Github</a>:</p>
+<p>Download sources from <a href="https://github.com/mysz/versionner/archive/1.3.0.zip">Github</a>:</p>
 
-<pre><code>wget -O 1.2.0.zip https://github.com/mysz/versionner/archive/1.2.0.zip
+<pre><code>wget -O 1.3.0.zip https://github.com/mysz/versionner/archive/1.3.0.zip
 </code></pre>
 
 <p>or</p>
 
-<pre><code>curl -o 1.2.0.zip https://github.com/mysz/versionner/archive/1.2.0.zip
+<pre><code>curl -o 1.3.0.zip https://github.com/mysz/versionner/archive/1.3.0.zip
 </code></pre>
 
 <p>Unpack:</p>
 
-<pre><code>unzip 1.2.0.zip
+<pre><code>unzip 1.3.0.zip
 </code></pre>
 
 <p>And install</p>
 
-<pre><code>cd versionner-1.2.0
+<pre><code>cd versionner-1.3.0
 python3 setup.py install
 </code></pre>
 
@@ -329,6 +339,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 
 <h2>
 <a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>ChangeLog</h2>
+
+<h3>
+<a id="v130" class="anchor" href="#v130" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.3.0</h3>
+
+<ul>
+<li>Allow to automatically commit changes done by commands: up, set, init</li>
+<li>Rewritten VCS subsystem, allows now for many engines</li>
+</ul>
 
 <h3>
 <a id="v120" class="anchor" href="#v120" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1.2.0</h3>
